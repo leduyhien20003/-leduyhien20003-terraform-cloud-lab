@@ -1,43 +1,27 @@
-/*terraform {
-  cloud {
-    organization = "my_lab_hien"
-
-    workspaces {
-      name = "remote-bakend"
-    }
-  }
-}*/
-
 provider "aws" {
   region = var.region
 }
-
-/*data "aws_ami" "ami" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = ["ami-04c913012f8977029"]
-  }
-
-  owners = ["099720109477"]
-}*/
-
-resource "aws_instance" "server" {
-  ami           = "ami-04c913012f8977029"
-  instance_type = "t2.micro"
-
-  lifecycle {
-    create_before_destroy = true
-  }
-
-  tags = {
-    Name = "Server"
-  }
+module "base" {
+  source     = "terraform-in-action/aws/bluegreen//modules/base"
+  production = var.production
 }
 
-output "public_ip" {
-  value = aws_instance.server.public_ip
+module "green" {
+  source      = "terraform-in-action/aws/bluegreen//modules/autoscaling"
+  app_version = "v1.0"
+  label       = "green"
+  base        = module.base
+}
+
+module "blue" {
+  source      = "terraform-in-action/aws/bluegreen//modules/autoscaling"
+  app_version = "v2.0"
+  label       = "blue"
+  base        = module.base
+}
+
+output "lb_dns_name" {
+  value = module.base.lb_dns_name
 }
 
 
