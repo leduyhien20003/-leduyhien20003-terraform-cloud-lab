@@ -3,6 +3,10 @@ variable "region" {
   default = "ap-southeast-1"
 }
 
+variable "production" {
+  default = "green"
+}
+
 variable "project" {
   description = "The project name to use for unique resource naming"
   default     = "terraform-series-hien"
