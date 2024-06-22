@@ -1,4 +1,4 @@
-terraform {
+/*terraform {
   cloud {
     organization = "my_lab_hien"
 
@@ -6,7 +6,7 @@ terraform {
       name = "remote-bakend"
     }
   }
-}
+}*/
 
 provider "aws" {
   region = "ap-southeast-1"
@@ -24,7 +24,7 @@ provider "aws" {
 }*/
 
 resource "aws_instance" "server" {
-  ami           = "ami-04c913012f8977029"
+  ami           = "ami-08a0d1e16fc3f61ea"
   instance_type = "t2.micro"
 
   lifecycle {
