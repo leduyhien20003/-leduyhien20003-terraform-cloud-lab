@@ -24,7 +24,7 @@ provider "aws" {
 }*/
 
 resource "aws_instance" "server" {
-  ami           = "ami-0eaf7c3456e7b5b68"
+  ami           = "ami-04c913012f8977029"
   instance_type = "t2.micro"
 
   lifecycle {
