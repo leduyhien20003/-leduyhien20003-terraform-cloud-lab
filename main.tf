@@ -9,7 +9,7 @@
 }*/
 
 provider "aws" {
-  region = "ap-southeast-1"
+  region = var.region
 }
 
 /*data "aws_ami" "ami" {
