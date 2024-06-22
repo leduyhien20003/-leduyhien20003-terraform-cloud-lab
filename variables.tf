@@ -4,7 +4,7 @@ variable "region" {
 }
 
 variable "production" {
-  default = "green"
+  default = "blue"
 }
 
 variable "project" {
